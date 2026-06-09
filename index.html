@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#f9d66a" />
+  <title>豪士藜麦吐司蛋白质合成大挑战</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="top-panel">
+      <div class="brand-row">
+        <img class="brand-logo" src="./assets/haoshi-logo.png" alt="豪士 Logo" />
+        <div>
+          <h1>藜麦吐司蛋白质合成大挑战</h1>
+          <p>点击屏幕选择落点，相同食材碰撞升级</p>
+        </div>
+      </div>
+
+      <section class="score-grid" aria-label="游戏数据">
+        <div class="score-item">
+          <span>总蛋白质</span>
+          <strong id="proteinValue">0g</strong>
+        </div>
+        <div class="score-item">
+          <span>当前得分</span>
+          <strong id="scoreValue">0</strong>
+        </div>
+        <div class="score-item">
+          <span>最高纪录</span>
+          <strong id="bestValue">0</strong>
+        </div>
+      </section>
+
+      <nav class="action-row" aria-label="游戏操作">
+        <button id="rankButton" class="pill-button" type="button">排行榜</button>
+        <button id="restartButton" class="pill-button primary" type="button">重新开始</button>
+      </nav>
+    </header>
+
+    <section class="game-stage-wrap">
+      <div id="nextPreview" class="next-preview" aria-live="polite">
+        <span>下一个</span>
+        <b id="nextIcon">🥚</b>
+      </div>
+      <div id="dropGuide" class="drop-guide"></div>
+      <div id="gameStage" class="game-stage">
+        <canvas id="worldCanvas"></canvas>
+        <div id="effectLayer" class="effect-layer"></div>
+      </div>
+    </section>
+  </main>
+
+  <section id="nicknameModal" class="modal-layer show" aria-modal="true" role="dialog">
+    <div class="modal-card">
+      <img class="brand-logo modal-logo" src="./assets/haoshi-logo.png" alt="豪士 Logo" />
+      <h2>开始蛋白质挑战</h2>
+      <p>输入昵称，合成属于你的豪士藜麦吐司。</p>
+      <input id="nicknameInput" class="text-input" type="text" maxlength="12" placeholder="请输入昵称" value="蛋白质工程师" />
+      <button id="startButton" class="wide-button" type="button">开始游戏</button>
+    </div>
+  </section>
+
+  <section id="rankModal" class="modal-layer" aria-modal="true" role="dialog">
+    <div class="modal-card wide">
+      <h2>本地排行榜 TOP 10</h2>
+      <ol id="rankList" class="rank-list"></ol>
+      <button id="closeRankButton" class="wide-button muted" type="button">返回游戏</button>
+    </div>
+  </section>
+
+  <section id="gameOverModal" class="modal-layer" aria-modal="true" role="dialog">
+    <div class="modal-card wide">
+      <h2>挑战完成</h2>
+      <p id="gameOverText">你的蛋白质成绩已生成。</p>
+      <div class="modal-actions">
+        <button id="certificateButton" class="wide-button" type="button">查看证书</button>
+        <button id="againButton" class="wide-button muted" type="button">再玩一次</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificateModal" class="modal-layer" aria-modal="true" role="dialog">
+    <div class="certificate-panel">
+      <div id="certificateCard" class="certificate-card">
+        <img class="certificate-logo" src="./assets/haoshi-logo.png" alt="豪士 Logo" />
+        <p class="certificate-kicker">HAOSHI PROTEIN CERTIFICATE</p>
+        <h2>豪士蛋白质认证证书</h2>
+        <div class="certificate-name" id="certName">蛋白质工程师</div>
+        <p class="certificate-title">称号：蛋白质工程师</p>
+        <div class="certificate-stats">
+          <div>
+            <span>总蛋白质</span>
+            <strong id="certProtein">0g</strong>
+          </div>
+          <div>
+            <span>总得分</span>
+            <strong id="certScore">0</strong>
+          </div>
+        </div>
+        <p class="certificate-time">挑战时间：<span id="certTime">-</span></p>
+        <p class="certificate-note">完成豪士藜麦吐司蛋白质合成大挑战</p>
+      </div>
+      <div class="certificate-actions">
+        <button id="saveCertificateButton" class="wide-button" type="button">保存 PNG</button>
+        <button id="closeCertificateButton" class="wide-button muted" type="button">关闭</button>
+      </div>
+    </div>
+  </section>
+
+  <div id="toastMessage" class="toast-message"></div>
+
+  <script src="./vendor/matter.min.js"></script>
+  <script src="./vendor/html2canvas.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
